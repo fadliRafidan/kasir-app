@@ -9,7 +9,7 @@ import {
     Image,
     Text,
 } from 'react-native';
-
+import Logout from '../../../assets/logout.svg'
 import {
     DrawerContentScrollView,
     DrawerItemList,
@@ -21,24 +21,27 @@ const ProfileSidebarDrawer = (props: any) => {
     const proileImage = 'react_logo.png';
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView style={{ flex: 1, marginTop:10 }}>
             <View className="items-center justify-start flex-row">
                 <Image
                     source={{ uri: BASE_PATH + proileImage }}
                     style={styles.sideMenuProfileIcon}
                 />
-                <Text className="text-kasir-blue text-lg font-medium">Admin</Text>
+                <Text className="text-kasir-blue text-[16px] font-medium ml-2">Admin</Text>
             </View>
             <DrawerContentScrollView {...props}>
                 <DrawerItemList {...props} />
             </DrawerContentScrollView>
-            <View className='p-4 mb-14 border-t-2 border-kasir-blue'>
+            <View className='p-4 mb-4 border-t-2 border-kasir-blue flex-row items-center gap-2 mx-2'>
+                <Logout height={30} width={30}/>
                 <Text
                     // eslint-disable-next-line react-native/no-inline-styles
                     style={{
-                        fontSize: 16,
+                        fontSize: 15,
                         textAlign: 'left',
                         color: 'grey',
+                        fontWeight: '500',
+                        marginLeft:50
                     }}>
                     Logout
                 </Text>
@@ -51,9 +54,10 @@ const ProfileSidebarDrawer = (props: any) => {
 const styles = StyleSheet.create({
     sideMenuProfileIcon: {
         resizeMode: 'center',
-        width: 100,
-        height: 100,
+        width: 70,
+        height: 70,
         borderRadius: 100 / 2,
+        marginLeft:10
     },
     iconStyle: {
         width: 15,

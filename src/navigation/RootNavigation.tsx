@@ -1,25 +1,29 @@
-import 'react-native-gesture-handler';
-import * as React from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import * as React from 'react';
+import { TouchableOpacity, View } from 'react-native';
+import 'react-native-gesture-handler';
 import CustomerIcon from '../../assets/customer-icon.svg';
 import HomeIcon from '../../assets/home-icon.svg';
-import MenuIcon from '../../assets/menu-icon.svg';
-import ProdukIcon from '../../assets/produk-icon.svg';
+import HamburgerIcon from '../../assets/icon-menu.svg';
 import KeranjangIcon from '../../assets/keranjang-icon.svg';
-import HomeScreen from '../screen/Home';
-import MenuScreen from '../screen/Menu';
+import MenuIcon from '../../assets/menu-icon.svg';
+import PengaturanIcon from '../../assets/pengaturan.svg';
+import PesananIcon from '../../assets/pesanan.svg';
+import ProdukIcon from '../../assets/produk-icon.svg';
+import PromoIcon from '../../assets/promo.svg';
+import ProfileSidebarDrawer from '../components/drawer/ProfileSidebarDrawer';
+import { KasirBlue, KasirGray } from '../constans/colors';
 import CustomerScreen from '../screen/Customer';
+import HomeScreen from '../screen/Home';
 import KeranjangScreen from '../screen/Keranjang';
+import MenuScreen from '../screen/Menu';
+import PengaturanScreen from '../screen/Pengaturan';
+import PesananScreen from '../screen/Pesanan';
 import ProdukScreen from '../screen/Produk';
 import PromoScreen from '../screen/Promo';
-import PesananScreen from '../screen/Pesanan';
-import PengaturanScreen from '../screen/Pengaturan';
-import { KasirBlue, KasirGray } from '../constans/colors';
-import { View } from 'react-native';
-import ProfileSidebarDrawer from '../components/drawer/ProfileSidebarDrawer';
 
 
 const Stack = createNativeStackNavigator();
@@ -165,23 +169,34 @@ const RootNavigation = () => {
     return (
         <NavigationContainer>
             <Drawer.Navigator
-                screenOptions={{
+                screenOptions={({ navigation }) => ({
                     headerStyle: {
                         backgroundColor: '#fff',
                     },
                     headerTintColor: '#000',
-                }}
+                    // eslint-disable-next-line react/no-unstable-nested-components
+                    headerLeft: () => (
+                        <TouchableOpacity onPress={() => navigation.toggleDrawer()} className="ml-4">
+                            <HamburgerIcon strokeWidth={10} stroke="#000" height={32} width={32} />
+                        </TouchableOpacity>
+                    ),
+                    drawerActiveBackgroundColor: KasirBlue,
+                    drawerActiveTintColor: '#FFFFFF',
+                    drawerStyle: { paddingHorizontal: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }
+                })}
                 drawerContent={props => <ProfileSidebarDrawer {...props} />}
             >
                 <Drawer.Screen
                     name="HomeScreenStack"
-                    options={{
+                    options={() => ({
                         drawerLabel: 'Dashboard',
                         title: '',
                         drawerIcon: ({ focused }) => (
-                            <MenuIcon stroke={focused ? "#FFF" : KasirGray} height={30} width={30} strokeWidth={2} />
-                        )
-                    }}
+                            <View className='ml-4'>
+                                <MenuIcon stroke={focused ? "#FFF" : KasirGray} height={26} width={26} strokeWidth={2} />
+                            </View>
+                        ),
+                    })}
                     component={HomeScreenStack}
                 />
                 <Drawer.Screen
@@ -189,6 +204,11 @@ const RootNavigation = () => {
                     options={{
                         drawerLabel: 'Promo',
                         title: 'Promo',
+                        drawerIcon: ({ focused }) => (
+                            <View className='ml-3'>
+                                <PromoIcon stroke={focused ? "#FFF" : KasirGray} height={30} width={30} strokeWidth={2} />
+                            </View>
+                        ),
                     }}
                     component={PromoScreenStack}
                 />
@@ -197,6 +217,11 @@ const RootNavigation = () => {
                     options={{
                         drawerLabel: 'R.Pesanan',
                         title: 'R.Pesanan',
+                        drawerIcon: ({ focused }) => (
+                            <View className='ml-4'>
+                                <PesananIcon stroke={focused ? "#FFF" : KasirGray} height={26} width={26} strokeWidth={2} />
+                            </View>
+                        ),
                     }}
                     component={PesananScreenStack}
                 />
@@ -205,6 +230,11 @@ const RootNavigation = () => {
                     options={{
                         drawerLabel: 'Pengaturan',
                         title: 'Pengaturan',
+                        drawerIcon: ({ focused }) => (
+                            <View className='ml-4'>
+                                <PengaturanIcon stroke={focused ? "#FFFFFF" : KasirGray} height={26} width={26} strokeWidth={2} />
+                            </View>
+                        ),
                     }}
                     component={PengaturanScreenStack}
                 />

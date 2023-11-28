@@ -4,13 +4,16 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-          'kasir-blue': '#6488F7',
+        'kasir-blue': '#6488F7',
       },
       fontFamily: {
-          'univers55': ['Univers55'],
-          'univers55-bold': ['Univers55Bold'],
+        univers55: ['Univers55'],
+        'univers55-bold': ['Univers55Bold'],
       },
-  },
+      boxShadowColor: {
+        kasir: '#bbb6b6',
+      },
+    },
   },
   plugins: [],
 };
