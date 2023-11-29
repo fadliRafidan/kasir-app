@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       colors: {
         'kasir-blue': '#6488F7',
+        'kasir-gray': '#bbb6b6',
       },
       fontFamily: {
         univers55: ['Univers55'],
